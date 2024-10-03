@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Reader and Writer</title>
+    <link rel="icon" href="https://png.pngtree.com/png-vector/20191107/ourmid/pngtree-bedtime-story-icon-cartoon-style-png-image_1950152.jpg"/>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Story</h1>
+        <textarea id="storyEditor" placeholder="Write your story here..."></textarea>
+        <button onclick="saveStory()">Save Story</button>
+        <button onclick="deleteStory()">Delete Story</button> 
+        <div class="saved-story">
+            <h2>Saved Story:</h2>
+            <p id="savedStoryContent"></p>
+        </div>
+    </div>
+
+    <script>
+        function saveStory() {
+            const storyContent = document.getElementById('storyEditor').value;
+            localStorage.setItem('story', storyContent);
+            document.getElementById('savedStoryContent').textContent = storyContent;
+        }
+
+        function deleteStory() {
+            localStorage.removeItem('story'); 
+            document.getElementById('savedStoryContent').textContent = ''; 
+            document.getElementById('storyEditor').value = ''; 
+        }
+
+        window.onload = function() {
+            const savedStory = localStorage.getItem('story');
+            if (savedStory) {
+                document.getElementById('savedStoryContent').textContent = savedStory;
+            }
+        };
+    </script>
+</body>
+</html>
